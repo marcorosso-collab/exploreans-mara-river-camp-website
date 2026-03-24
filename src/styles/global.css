@@ -241,7 +241,7 @@ h3, .h3-card {
   .nav-links {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 70%;
     max-width: 300px;
     height: 100vh;
@@ -249,22 +249,30 @@ h3, .h3-card {
     flex-direction: column;
     padding: 80px 40px 40px;
     gap: 24px;
-    transition: right 0.3s ease;
+    transition: transform 0.3s ease;
     z-index: 100;
     display: flex;
+    transform: translateX(100%);
+    visibility: hidden;
   }
-  .nav-links.active { right: 0; }
-  .nav-links li { display: block; }
+  .nav-links.active { 
+    transform: translateX(0);
+    visibility: visible;
+  }
+  .nav-links li { display: block; width: 100%; }
   .nav-links a { 
     color: var(--white) !important; 
     font-size: 14px;
     display: block;
-    padding: 8px 0;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
+  .nav-links a:last-child { border-bottom: none; }
   .nav-cta { 
     border-color: rgba(255,255,255,0.4) !important;
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 16px;
+    text-align: center;
   }
 }
 
