@@ -24,10 +24,16 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="hero-bg">
-      {hero.image
-        ? <img src={hero.image} alt={hero.headline} />
-        : <div class="img-placeholder" style="height:100%;aspect-ratio:auto;">Hero image — upload via CMS</div>
-      }
+      {hero.video ? (
+        <video autoplay muted loop playsinline poster={hero.image || undefined}>
+          <source src={hero.video} type="video/mp4" />
+          {hero.image && <img src={hero.image} alt={hero.headline} />}
+        </video>
+      ) : hero.image ? (
+        <img src={hero.image} alt={hero.headline} />
+      ) : (
+        <div class="img-placeholder" style="height:100%;aspect-ratio:auto;">Hero image — upload via CMS</div>
+      )}
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
