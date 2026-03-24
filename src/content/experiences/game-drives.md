@@ -1,8 +1,8 @@
 ---
-title: "Game Drives"
-label: "Signature"
-description: "Morning, afternoon, or full-day drives through the Maasai Mara with expert guides."
-image: "/images/game-drive.jpg"
+title: Game Drives
+label: Signature
+description: Morning, afternoon, or full-day drives through the Maasai Mara with expert guides.
+image: /images/uploads/Activity_Game Drive.jpg
 featured: true
 order: 1
 ---
