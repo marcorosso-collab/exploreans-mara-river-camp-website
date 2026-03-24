@@ -34,7 +34,12 @@ const {
         site.siteName
       )}
     </a>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#camp">The Camp</a></li>
       <li><a href="#stay">Stay</a></li>
       <li><a href="#when-to-visit">When to Visit</a></li>
@@ -89,8 +94,24 @@ const {
 
   <script>
     const nav = document.getElementById('mainNav');
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    
     window.addEventListener('scroll', () => {
       nav?.classList.toggle('scrolled', window.scrollY > 80);
+    });
+    
+    navToggle?.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks?.classList.toggle('active');
+    });
+    
+    // Close menu when clicking a link
+    navLinks?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle?.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
     });
   </script>
 </body>
