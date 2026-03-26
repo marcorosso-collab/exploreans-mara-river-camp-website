@@ -611,3 +611,20 @@ h3, .h3-card {
 .journal-card:hover .read-more {
   color: var(--ochre-deep);
 }
+
+/* ─── Accommodation More Info Button ─── */
+.btn-more-info {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  border: 1px solid var(--ochre);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  transition: all 0.3s ease;
+}
+.btn-more-info:hover {
+  background: var(--ochre);
+  color: var(--white);
+}
