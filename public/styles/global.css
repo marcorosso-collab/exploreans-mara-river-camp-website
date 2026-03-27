@@ -307,6 +307,14 @@ h3, .h3-card {
 }
 .nav.scrolled .nav-cta { border-color: var(--mara-charcoal); color: var(--mara-charcoal); }
 
+/* Nav dark mode - for pages with light backgrounds (detail pages) */
+.nav.nav-dark { background: rgba(250,247,242,0.97); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+.nav.nav-dark .nav-brand { color: var(--mara-black); }
+.nav.nav-dark .nav-links a { color: var(--mara-charcoal); }
+.nav.nav-dark .nav-toggle span { background: var(--mara-black); }
+.nav.nav-dark .nav-cta { border-color: var(--mara-charcoal); color: var(--mara-charcoal); }
+.nav.nav-dark .nav-cta:hover { background: var(--mara-charcoal); color: var(--white); }
+
 /* ─── Hero ─── */
 .hero {
   position: relative;
