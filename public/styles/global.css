@@ -304,6 +304,8 @@ h3, .h3-card {
   border: 1px solid rgba(255,255,255,0.4);
   font-size: 12px !important;
   letter-spacing: 0.1em !important;
+  color: rgba(255,255,255,0.85);
+  transition: color 0.3s, border-color 0.3s;
 }
 .nav.scrolled .nav-cta { border-color: var(--mara-charcoal); color: var(--mara-charcoal); }
 
