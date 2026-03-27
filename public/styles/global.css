@@ -305,6 +305,11 @@ h3, .h3-card {
     border: 1px solid var(--mara-charcoal) !important;
     color: var(--mara-charcoal) !important;
   }
+  /* Detail pages (nav-dark) - black text/border immediately on mobile */
+  .nav.nav-dark .nav-cta-mobile {
+    border: 1px solid var(--mara-charcoal) !important;
+    color: var(--mara-charcoal) !important;
+  }
   .nav-toggle {
     margin-left: 0;
   }
