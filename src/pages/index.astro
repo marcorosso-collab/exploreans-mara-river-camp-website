@@ -157,7 +157,7 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
       <div class="grid-3col">
         {exps.map((exp) => (
-          <div class="exp-card">
+          <a href={`/experiences/${exp.slug}`} class="exp-card experience-card-link">
             {exp.data.image
               ? <img src={exp.data.image} alt={exp.data.title} style="aspect-ratio:16/10;object-fit:cover;" />
               : <div class="img-placeholder ratio-16-10">{exp.data.title} — upload via CMS</div>
@@ -165,8 +165,9 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
             <div class="card-overlay">
               <div class="exp-label">{exp.data.label}</div>
               <h3>{exp.data.title}</h3>
+              <span class="read-more">More info →</span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>

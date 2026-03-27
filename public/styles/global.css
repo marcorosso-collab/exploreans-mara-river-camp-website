@@ -640,3 +640,26 @@ h3, .h3-card {
   background: var(--ochre);
   color: var(--white);
 }
+
+/* ─── Experience Cards ─── */
+.experience-card-link {
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.experience-card-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+.experience-card-link .read-more {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.experience-card-link:hover .read-more {
+  color: var(--ochre-deep);
+}

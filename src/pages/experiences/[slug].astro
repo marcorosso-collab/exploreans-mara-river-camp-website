@@ -1,0 +1,346 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+// Generate static paths for all experiences
+export async function getStaticPaths() {
+  const experiences = await getCollection('experiences');
+  return experiences.map((exp) => ({
+    params: { slug: exp.slug },
+    props: { exp },
+  }));
+}
+
+const { exp } = Astro.props;
+const { Content } = await exp.render();
+
+// Support up to 4 images (image, image2, image3, image4)
+const images = [
+  exp.data.image,
+  exp.data.image2,
+  exp.data.image3,
+  exp.data.image4,
+].filter(Boolean);
+
+const hasCarousel = images.length > 1;
+---
+
+<Base title={`${exp.data.title} — Experiences`} description={exp.data.description} navDark={true}>
+  <article class="experience-detail">
+    <div class="container">
+      <!-- Back Link -->
+      <a href="/#experiences" class="back-link">← Back to Experiences</a>
+      
+      <!-- Image Carousel / Gallery -->
+      <div class="image-gallery" data-carousel={hasCarousel}>
+        {hasCarousel ? (
+          <>
+            <div class="carousel-container">
+              {images.map((img, index) => (
+                <div class={`carousel-slide ${index === 0 ? 'active' : ''}`} data-slide={index}>
+                  <img src={img} alt={`${exp.data.title} - Image ${index + 1}`} />
+                </div>
+              ))}
+            </div>
+            <button class="carousel-prev" aria-label="Previous image">←</button>
+            <button class="carousel-next" aria-label="Next image">→</button>
+            <div class="carousel-dots">
+              {images.map((_, index) => (
+                <button class={`dot ${index === 0 ? 'active' : ''}`} data-slide={index} aria-label={`Go to image ${index + 1}`}></button>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div class="single-image">
+            {images[0] ? (
+              <img src={images[0]} alt={exp.data.title} />
+            ) : (
+              <div class="img-placeholder">{exp.data.title}</div>
+            )}
+          </div>
+        )}
+      </div>
+
+      <!-- Experience Header -->
+      <header class="exp-header">
+        <div class="exp-meta">
+          <span class="exp-label">{exp.data.label}</span>
+          {exp.data.duration && <span class="exp-duration">{exp.data.duration}</span>}
+        </div>
+        <h1 class="exp-title">{exp.data.title}</h1>
+        <p class="exp-description">{exp.data.description}</p>
+      </header>
+
+      <!-- Experience Body Content -->
+      <div class="exp-body">
+        <Content />
+      </div>
+
+      <!-- CTA Button - Linked to CMS URL -->
+      {exp.data.ctaUrl && (
+        <div class="exp-cta">
+          <a href={exp.data.ctaUrl} class="btn-primary" target="_blank" rel="noopener">
+            {exp.data.ctaText || 'Book This Experience'}
+          </a>
+        </div>
+      )}
+    </div>
+  </article>
+</Base>
+
+<script>
+  // Carousel functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const gallery = document.querySelector('.image-gallery[data-carousel="true"]');
+    if (!gallery) return;
+
+    const slides = gallery.querySelectorAll('.carousel-slide');
+    const dots = gallery.querySelectorAll('.carousel-dots .dot');
+    const prevBtn = gallery.querySelector('.carousel-prev');
+    const nextBtn = gallery.querySelector('.carousel-next');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+
+    prevBtn?.addEventListener('click', () => {
+      const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+      showSlide(newIndex);
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+      showSlide(newIndex);
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showSlide(index));
+    });
+  });
+</script>
+
+<style>
+  .experience-detail {
+    padding: 100px 0 80px;
+    background: var(--cream);
+    min-height: 100vh;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 32px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--mara-charcoal);
+    transition: color 0.2s;
+  }
+  .back-link:hover {
+    color: var(--ochre);
+  }
+
+  /* Image Gallery / Carousel */
+  .image-gallery {
+    position: relative;
+    margin-bottom: 48px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .single-image img,
+  .carousel-slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+
+  /* Carousel Styles */
+  .carousel-container {
+    position: relative;
+    height: 500px;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
+  .carousel-prev,
+  .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    color: var(--mara-charcoal);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .carousel-prev:hover,
+  .carousel-next:hover {
+    background: var(--white);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .carousel-prev { left: 20px; }
+  .carousel-next { right: 20px; }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .carousel-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-dots .dot.active {
+    background: var(--white);
+    transform: scale(1.2);
+  }
+
+  /* Experience Header */
+  .exp-header {
+    margin-bottom: 48px;
+  }
+
+  .exp-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .exp-label {
+    color: var(--ochre);
+    font-weight: 500;
+  }
+
+  .exp-duration {
+    color: var(--warm-stone);
+  }
+
+  .exp-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 400;
+    color: var(--mara-black);
+    margin-bottom: 16px;
+  }
+
+  .exp-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--mara-charcoal);
+    max-width: 600px;
+  }
+
+  /* Experience Body */
+  .exp-body {
+    max-width: 720px;
+    margin-bottom: 64px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--mara-charcoal);
+  }
+
+  .exp-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--mara-black);
+    margin: 48px 0 24px;
+  }
+
+  .exp-body :global(h3) {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--mara-black);
+    margin: 36px 0 16px;
+  }
+
+  .exp-body :global(p) {
+    margin-bottom: 20px;
+  }
+
+  .exp-body :global(strong) {
+    color: var(--mara-black);
+    font-weight: 500;
+  }
+
+  /* CTA */
+  .exp-cta {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 16px 32px;
+    background: var(--ochre);
+    color: var(--white);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--ochre-deep);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .experience-detail {
+      padding: 80px 0 60px;
+    }
+
+    .single-image img,
+    .carousel-container {
+      height: 300px;
+    }
+
+    .carousel-prev,
+    .carousel-next {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+  }
+</style>
