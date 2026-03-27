@@ -176,11 +176,7 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
   <!-- ═══ DINING ═══ -->
   <section class="section-white">
     <div class="container">
-      <div class="grid-2col">
-        {dining.image
-          ? <img src={dining.image} alt="Dining" style="min-height:500px;object-fit:cover;" />
-          : <div class="img-placeholder tall">Dining — upload via CMS</div>
-        }
+      <div class="grid-2col grid-2col-reverse">
         <div>
           <p class="section-label">{dining.label}</p>
           <h2 set:html={dining.headline} />
@@ -193,6 +189,10 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
             ))}
           </div>
         </div>
+        {dining.image
+          ? <img src={dining.image} alt="Dining" style="min-height:500px;object-fit:cover;" />
+          : <div class="img-placeholder tall">Dining — upload via CMS</div>
+        }
       </div>
     </div>
   </section>
