@@ -4,6 +4,8 @@ import { getEntry } from 'astro:content';
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
   navDark?: boolean;
 }
 
@@ -13,8 +15,13 @@ const site = settings.data;
 const {
   title = `${site.siteName} ${site.propertyName} — Maasai Mara, Kenya`,
   description = 'Perched on a graceful bend of the Mara River at the foot of the Oloololo Escarpment. Authentic safari experiences where nature leads.',
+  ogImage,
+  canonicalUrl = Astro.url.pathname,
   navDark = false,
 } = Astro.props;
+
+const fullCanonicalUrl = `https://exloreansmararivercamp.netlify.app${canonicalUrl}`;
+const fullOgImage = ogImage ? (ogImage.startsWith('http') ? ogImage : `https://exloreansmararivercamp.netlify.app${ogImage}`) : null;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +30,24 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href={fullCanonicalUrl} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={fullCanonicalUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  {fullOgImage && <meta property="og:image" content={fullOgImage} />}
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={fullCanonicalUrl} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  {fullOgImage && <meta property="twitter:image" content={fullOgImage} />}
+  
   <link rel="stylesheet" href="/styles/global.css">
 </head>
 <body>

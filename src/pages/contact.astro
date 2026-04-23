@@ -13,7 +13,7 @@ const seoTitle = content.seo_title || `${content.pageTitle} — ${site.siteName}
 const seoDescription = content.seo_description || "Get in touch with Exploreans Mara River Camp. Our team is ready to help plan your authentic safari experience.";
 ---
 
-<Base title={seoTitle} description={seoDescription}>
+<Base title={seoTitle} description={seoDescription} ogImage={content.og_image}>
 
   <!-- ═══ PAGE HEADER ═══ -->
   <section class="page-header">

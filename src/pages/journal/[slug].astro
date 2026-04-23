@@ -19,7 +19,7 @@ const seoTitle = post.data.seo_title || `${post.data.title} — Journal`;
 const seoDescription = post.data.seo_description || post.data.description;
 ---
 
-<Base title={seoTitle} description={seoDescription} navDark={true}>
+<Base title={seoTitle} description={seoDescription} ogImage={post.data.og_image} navDark={true}>
   <article class="journal-article">
     <div class="container">
       <!-- Article Header -->
