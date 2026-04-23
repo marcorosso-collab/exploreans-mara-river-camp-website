@@ -35,7 +35,7 @@ const seoDescription = post.data.seo_description || post.data.description;
       <!-- Article Image -->
       {post.data.image && (
         <div class="article-image">
-          <img src={post.data.image} alt={post.data.title} />
+          <img src={post.data.image} alt={post.data.imageAlt || post.data.title} />
         </div>
       )}
 

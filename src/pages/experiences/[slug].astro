@@ -42,7 +42,7 @@ const hasCarousel = images.length > 1;
             <div class="carousel-container">
               {images.map((img, index) => (
                 <div class={`carousel-slide ${index === 0 ? 'active' : ''}`} data-slide={index}>
-                  <img src={img} alt={`${exp.data.title} - Image ${index + 1}`} />
+                  <img src={img} alt={index === 0 && exp.data.imageAlt ? exp.data.imageAlt : `${exp.data.title} - Image ${index + 1}`} />
                 </div>
               ))}
             </div>
@@ -57,7 +57,7 @@ const hasCarousel = images.length > 1;
         ) : (
           <div class="single-image">
             {images[0] ? (
-              <img src={images[0]} alt={exp.data.title} />
+              <img src={images[0]} alt={exp.data.imageAlt || exp.data.title} />
             ) : (
               <div class="img-placeholder">{exp.data.title}</div>
             )}
