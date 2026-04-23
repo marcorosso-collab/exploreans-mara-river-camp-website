@@ -4,16 +4,19 @@ import { getEntry } from 'astro:content';
 
 const settings = await getEntry('settings', 'global');
 const site = settings.data;
+
+const contactData = await getEntry('contact', 'contact');
+const content = contactData.data;
 ---
 
-<Base title={`Contact Us — ${site.siteName} ${site.propertyName}`} description="Get in touch with Exploreans Mara River Camp. Our team is ready to help plan your authentic safari experience.">
+<Base title={`${content.pageTitle} — ${site.siteName} ${site.propertyName}`} description="Get in touch with Exploreans Mara River Camp. Our team is ready to help plan your authentic safari experience.">
 
   <!-- ═══ PAGE HEADER ═══ -->
   <section class="page-header">
     <div class="container">
       <p class="section-label center">Get in Touch</p>
-      <h1>Contact Us</h1>
-      <p class="lead-text">We are here to help you plan your authentic safari experience. Fill out the form below and a member of our team will be in touch shortly.</p>
+      <h1>{content.pageTitle}</h1>
+      <p class="lead-text">{content.pageSubtitle}</p>
     </div>
   </section>
 
@@ -95,51 +98,55 @@ const site = settings.data;
         <!-- Contact Information -->
         <div class="contact-info">
           <div class="info-card">
-            <h3>Reservations</h3>
-            <p class="body-text">Our reservations team is available to assist you with bookings and inquiries.</p>
+            <h3>{content.reservations.title}</h3>
+            <p class="body-text">{content.reservations.description}</p>
             <div class="info-item">
               <span class="info-label">Email</span>
-              <a href="mailto:reservations@maraexploreans.com" class="info-value">reservations@maraexploreans.com</a>
+              <a href={`mailto:${content.reservations.email}`} class="info-value">{content.reservations.email}</a>
             </div>
             <div class="info-item">
               <span class="info-label">Phone</span>
-              <a href="tel:+254123456789" class="info-value">+254 123 456 789</a>
+              <a href={`tel:${content.reservations.phone.replace(/\s/g, '')}`} class="info-value">{content.reservations.phone}</a>
             </div>
             <div class="info-item">
               <span class="info-label">Hours</span>
-              <span class="info-value">Mon–Fri: 8am–6pm EAT</span>
+              <span class="info-value">{content.reservations.hours}</span>
             </div>
           </div>
           
           <div class="info-card">
-            <h3>Location</h3>
-            <p class="body-text">Exploreans Mara River Camp is located in the heart of the Maasai Mara.</p>
+            <h3>{content.location.title}</h3>
+            <p class="body-text">{content.location.description}</p>
             <div class="info-item">
               <span class="info-label">Address</span>
-              <span class="info-value">Maasai Mara National Reserve<br/>Narok County, Kenya</span>
+              <span class="info-value">{content.location.address1}<br/>{content.location.address2}</span>
             </div>
             <div class="info-item">
               <span class="info-label">Nearest Airstrip</span>
-              <span class="info-value">Mara North Airstrip (5 min)</span>
+              <span class="info-value">{content.location.airstrip}</span>
             </div>
           </div>
           
           <div class="info-card">
-            <h3>Connect With Us</h3>
-            <p class="body-text">Follow us for the latest updates and safari inspiration.</p>
+            <h3>{content.social.title}</h3>
+            <p class="body-text">{content.social.description}</p>
             <div class="social-links">
-              <a href="#" class="social-link" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
-              </a>
-              <a href="#" class="social-link" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                </svg>
-              </a>
+              {content.social.instagram && (
+                <a href={content.social.instagram} class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg>
+                </a>
+              )}
+              {content.social.facebook && (
+                <a href={content.social.facebook} class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -152,10 +159,10 @@ const site = settings.data;
   <section class="map-section">
     <div class="map-placeholder">
       <div class="map-content">
-        <p class="section-label center">Our Location</p>
-        <h2>Maasai Mara, Kenya</h2>
-        <p class="body-text">Perched on a graceful bend of the Mara River at the foot of the Oloololo Escarpment</p>
-        <a href="https://maps.google.com/?q=Maasai+Mara+Kenya" target="_blank" rel="noopener" class="text-link">
+        <p class="section-label center">{content.map.subtitle}</p>
+        <h2>{content.map.title}</h2>
+        <p class="body-text">{content.map.description}</p>
+        <a href={content.map.mapsUrl} target="_blank" rel="noopener" class="text-link">
           View on Google Maps
           <span class="arrow"></span>
         </a>
