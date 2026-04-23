@@ -131,4 +131,39 @@ const journal = defineCollection({
   }),
 });
 
-export const collections = { settings, homepage, accommodation, experiences, journal };
+// ─── Contact Page ───
+const contact = defineCollection({
+  type: 'data',
+  schema: z.object({
+    pageTitle: z.string(),
+    pageSubtitle: z.string(),
+    reservations: z.object({
+      title: z.string(),
+      description: z.string(),
+      email: z.string(),
+      phone: z.string(),
+      hours: z.string(),
+    }),
+    location: z.object({
+      title: z.string(),
+      description: z.string(),
+      address1: z.string(),
+      address2: z.string(),
+      airstrip: z.string(),
+    }),
+    social: z.object({
+      title: z.string(),
+      description: z.string(),
+      instagram: z.string().optional(),
+      facebook: z.string().optional(),
+    }),
+    map: z.object({
+      title: z.string(),
+      subtitle: z.string(),
+      description: z.string(),
+      mapsUrl: z.string(),
+    }),
+  }),
+});
+
+export const collections = { settings, homepage, accommodation, experiences, journal, contact };
