@@ -148,6 +148,9 @@ collections:
       - { label: "Image Alt Text (SEO)", name: "imageAlt", widget: "string", required: false, hint: "Describe the image for accessibility and SEO" }
       - { label: "Order", name: "order", widget: "number" }
       - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: true, hint: "50-60 characters recommended" }
+      - { label: "Meta Description", name: "seo_description", widget: "text", required: true, hint: "150-160 characters recommended" }
+      - { label: "Social Share Image", name: "og_image", widget: "image", required: false }
 
   - name: "experiences"
     label: "Experiences"
@@ -163,6 +166,9 @@ collections:
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
       - { label: "Order", name: "order", widget: "number" }
       - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: true, hint: "50-60 characters recommended" }
+      - { label: "Meta Description", name: "seo_description", widget: "text", required: true, hint: "150-160 characters recommended" }
+      - { label: "Social Share Image", name: "og_image", widget: "image", required: false }
 
   - name: "journal"
     label: "Journal"
@@ -178,6 +184,9 @@ collections:
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: true, hint: "50-60 characters recommended" }
+      - { label: "Meta Description", name: "seo_description", widget: "text", required: true, hint: "150-160 characters recommended" }
+      - { label: "Social Share Image", name: "og_image", widget: "image", required: false }
 
   - name: "contact"
     label: "Contact Page"
@@ -222,3 +231,6 @@ collections:
               - { label: "Subtitle", name: "subtitle", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Google Maps URL", name: "mapsUrl", widget: "string" }
+          - { label: "SEO Title", name: "seo_title", widget: "string", required: true, hint: "50-60 characters recommended" }
+          - { label: "Meta Description", name: "seo_description", widget: "text", required: true, hint: "150-160 characters recommended" }
+          - { label: "Social Share Image", name: "og_image", widget: "image", required: false }
