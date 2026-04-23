@@ -170,3 +170,52 @@ collections:
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "contact"
+    label: "Contact Page"
+    folder: "src/content/contact"
+    create: false
+    delete: false
+    extension: json
+    format: json
+    files:
+      - name: "contact"
+        label: "Contact Page Content"
+        file: "src/content/contact/contact.json"
+        fields:
+          - { label: "Page Title", name: "pageTitle", widget: "string" }
+          - { label: "Page Subtitle", name: "pageSubtitle", widget: "text" }
+          - label: "Reservations Section"
+            name: "reservations"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Phone", name: "phone", widget: "string" }
+              - { label: "Hours", name: "hours", widget: "string" }
+          - label: "Location Section"
+            name: "location"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Address Line 1", name: "address1", widget: "string" }
+              - { label: "Address Line 2", name: "address2", widget: "string" }
+              - { label: "Nearest Airstrip", name: "airstrip", widget: "string" }
+          - label: "Social Section"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+              - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
+          - label: "Map Section"
+            name: "map"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Google Maps URL", name: "mapsUrl", widget: "string" }
