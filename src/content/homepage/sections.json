@@ -2,7 +2,8 @@
   "hero": {
     "tagline": "Maasai Mara, Kenya",
     "headline": "Where the river bends, the wild begins",
-    "image": "/images/uploads/MaraRiverCamp-kleinBeyond Images-183 (1).jpg",
+    "image": "/images/uploads/safari-experience-exploreans-mara-river-camp.jpg",
+    "imageAlt": "Guests enjoying a sunset safari adventure on a private tour at Exploreans Mara River Camp in the Maasai Mara during the great migration.",
     "video": ""
   },
   "intro": {
@@ -10,7 +11,8 @@
     "headline": "A front-row seat to one of Earth's greatest spectacles",
     "leadText": "Perched on a graceful bend of the Mara River at the foot of the Oloololo Escarpment, the camp sits where comfort and the raw African wilderness dissolve into one another.",
     "bodyText": "This is not a place designed to impress — it is a place that reveals itself. Elephants crossing the grounds at dusk. Hippos surfacing a stone's throw from your terrace. The escarpment catching the last light. Every moment here is unscripted, and that is precisely the point.",
-    "image": "/images/uploads/MaraRiverCamp-kleinBeyond Images-67.jpg"
+    "image": "/images/uploads/MaraRiverCamp-kleinBeyond Images-67.jpg",
+    "imageAlt": ""
   },
   "riverUsp": {
     "label": "What makes us different",
