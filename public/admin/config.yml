@@ -173,11 +173,6 @@ collections:
 
   - name: "contact"
     label: "Contact Page"
-    folder: "src/content/contact"
-    create: false
-    delete: false
-    extension: json
-    format: json
     files:
       - name: "contact"
         label: "Contact Page Content"
