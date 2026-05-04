@@ -12,6 +12,7 @@ const settings = defineCollection({
     transferInfo: z.string(),
     migrationSeason: z.string(),
     logo: z.string().optional(),
+    favicon: z.string().optional(),
     socialLinks: z.object({
       instagram: z.string().optional(),
       facebook: z.string().optional(),
